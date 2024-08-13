@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package chatbot;
+
+// The chatbot service definition.
+service ChatbotService {
+  // Sends PDF file paths to the chatbot
+  rpc SendPDFPaths (PDFPathsRequest) returns (PDFPathsResponse) {}
+  // Sends a message to the chatbot and gets a response
+  rpc SendMessage (ChatRequest) returns (ChatResponse) {}
+}
+
+
+// The request message containing the paths of the PDF files.
+message PDFPathsRequest {
+  repeated string pdf_paths = 1;
+}
+
+// The response message confirming receipt of the PDF paths.
+message PDFPathsResponse {
+  string reply = 1;
+  repeated string status = 2; // The statuses of processing individual PDFs
+}
+
+// The request message containing the user's message.
+message ChatRequest {
+  string message = 1;
+}
+
+// The response message containing the chatbot's reply.
+message ChatResponse {
+  string reply = 1;
+}
